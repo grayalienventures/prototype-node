@@ -1,0 +1,29 @@
+{
+    "compilerOptions": {
+        "outDir": "./dist/",
+        "allowJs": true,    
+        "sourceMap": true,
+        "skipLibCheck": true,
+        "noImplicitAny": false,
+        "module": "commonjs",
+        "target": "es5",
+        "jsx": "react",
+        "lib": ["dom", "es2015", "ES2017"],
+        "importHelpers": true,  
+        "moduleResolution": "node",
+        "allowSyntheticDefaultImports": true,
+        "esModuleInterop": true  
+    },
+    "include": [
+        "./src/**/*"
+    ],
+    "awesomeTypescriptLoaderOptions": {
+        "reportFiles": [
+            "./src/**/*.{ts,tsx}"
+        ],
+        // "forceIsolatedModules":false
+        "useCache":true,
+        "usePrecompiledFiles":true
+    }
+    // "esModuleInterop": true  
+}
