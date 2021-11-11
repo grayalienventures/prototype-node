@@ -16,7 +16,7 @@ import Notfound from './screens/notfound';
 
 
 const Screens = (props) => {
-    let auth = useSelector(state => state.auth)
+    let auth = useSelector((state:any) => state.auth)
     const dispatch = useDispatch()
 
     React.useEffect(() => {

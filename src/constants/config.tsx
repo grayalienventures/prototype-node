@@ -1,15 +1,15 @@
 
 
-import localConfig from '../localConfig'
+
 
 
 const optionsEndPoint = { version: "v2" }
 const name =  process.env.APP_TITLE
 const urlPro = process.env.END_POINT
 const endpoint = process.env.NODE_ENV === 'production' ? `${urlPro}/wp-json/wp/${optionsEndPoint.version}` 
-  : `${localConfig.endpoint}/wp-json/wp/${optionsEndPoint.version}`
-const urlHome = process.env.NODE_ENV === 'production' ? `${urlPro}` : `${localConfig.endpoint}`
-const server_socket = process.env.NODE_ENV === 'production' ? `${urlPro}` : `${localConfig.serverSocket}`
+  : `${process.env.LOCAL_END_POINT}/wp-json/wp/${optionsEndPoint.version}`
+const urlHome = process.env.NODE_ENV === 'production' ? `${urlPro}` : `${process.env.LOCAL_END_POINT}`
+const server_socket = process.env.NODE_ENV === 'production' ? `${urlPro}` : `${process.env.LOCAL_SERVER_SOCKET}`
 const platform = "website"
 
 export default {
