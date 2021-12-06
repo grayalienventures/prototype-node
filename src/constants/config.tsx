@@ -1,16 +1,18 @@
 
 
-
-
-
-const optionsEndPoint = { version: "v2" }
-const name =  process.env.APP_TITLE
-const urlPro = process.env.END_POINT
-const endpoint = process.env.NODE_ENV === 'production' ? `${urlPro}/wp-json/wp/${optionsEndPoint.version}` 
-  : `${process.env.LOCAL_END_POINT}/wp-json/wp/${optionsEndPoint.version}`
-const urlHome = process.env.NODE_ENV === 'production' ? `${urlPro}` : `${process.env.LOCAL_END_POINT}`
-const server_socket = process.env.NODE_ENV === 'production' ? `${urlPro}` : `${process.env.LOCAL_SERVER_SOCKET}`
-const platform = "website"
+const optionsEndPoint = {
+  version: 'v1',
+  port: 80,
+}
+const name = process.env.APP_TITLE;
+const serverEndPoint = process.env.END_POINT;
+const urlPro = process.env.APP_URL;
+const isProduction = process.env.NODE_ENV === "production"
+const endpoint = isProduction ? `${serverEndPoint}/wp-json/wp/${optionsEndPoint.version}` : `${process.env.LOCAL_END_POINT}/wp-json/wp/${optionsEndPoint.version}`;
+const urlHome = isProduction ? `${serverEndPoint}` : `${process.env.LOCAL_END_POINT}`;
+const server_socket = isProduction ? `${urlPro}` : `${process.env.LOCAL_SERVER_SOCKET}`;
+const platform = "website";
+const wpJson = `${urlHome}/wp-json`
 
 export default {
   endpoint,
@@ -27,7 +29,13 @@ export default {
     yelp: `http://yelp.com/biz/${name}`,
     instagram: `http://instagram.com/${name}`
   },
- url:{
-   
- }
+  url: {
+    home: `${urlHome}`,
+    wpJson: `${wpJson}`,
+    auth: {
+      login: `${wpJson}/wp/v2/token`,
+      refresh: `${wpJson}/wp/v2/token/refresh`,
+      revoke: `${wpJson}/wp/v2/token/revoke`,
+    }
+  }
 }

@@ -29,15 +29,34 @@ const server = http.createServer(app).listen(port);
 const io = require('socket.io')(server);
 
 
+const isDevelopment = process.env.NODE_ENV !== 'production';
+
+if (isDevelopment)
+{
+
+    const webpackDevServer = require('webpack-dev-server');
+
+    const webpack = require('webpack');
+    const webpackConfig = require('./webpack/dev.js');
+    const compiler = webpack(webpackConfig);
+
+    app.use(require('webpack-dev-middleware')(compiler, {
+        // noInfo: true,
+        publicPath: webpackConfig.output.publicPath,
+    }));
+
+    app.use(require('webpack-hot-middleware')(compiler, {
+        log: false,
+        path: `/__webpack_hmr`,
+        heartbeat: 10 * 1000,
+    }));
+}
+
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
 
-
-app.get('/.well-known/pki-validation/fileauth.txt', function (req, res) {
-    res.sendFile(path.join(__dirname + '/fileauth.txt'));
-})
 
 
 // io.set('origins', '*:*');
@@ -64,13 +83,13 @@ app.use(compression());
 app.use(express.static(path.join(__dirname, 'dist')));
 
 app.use((req, res) => res.sendFile(__dirname + '/dist/index.html'));
-app.use(favicon(path.join(__dirname, 'src', 'favicon.ico')))
+app.use(favicon(path.join(__dirname, 'src/assets/icons', 'favicon.ico')))
 
 // Switch off the default 'X-Powered-By: Express' header
 app.disable('x-powered-by');
 
 io.sockets.on('connection', function (socket) {
-   
+
     socket.emit("connected", socket.id);
 
     socket.on('connected', function (args) {
@@ -78,9 +97,9 @@ io.sockets.on('connection', function (socket) {
     });
 
     socket.on('disconnect', function (args) {
-      
+
     });
 });
 
 
-console.log("listen Port",port)
+console.log("listen Port", port)
