@@ -18,7 +18,6 @@ module.exports = {
     extensions: ['.ts', '.tsx', '.js', '.jsx'],
     alias: {
       'assets': resolve(__dirname, '../src/assets'),
-      //'@styles': path.resolve(__dirname, 'src/assets/styles'),
       '@images': resolve(__dirname, '../src/assets/images')
     },
   },
@@ -29,11 +28,6 @@ module.exports = {
       "/api": `http://localhost:${process.env.PORT}`
     }
   },
-  // output: {
-  //   filename: 'bundle.js',
-  //   path: resolve(__dirname, '../../dist'),
-  //   publicPath: '/',
-  // },
   context: resolve(__dirname, '../src'),
   module: {
     rules: [
@@ -76,7 +70,7 @@ module.exports = {
   plugins: [
     new CheckerPlugin(),
     new HtmlWebpackPlugin({
-      template: 'index.html.ejs',
+      template: resolve(__dirname, '../src/assets/index.html.ejs'),
     }),
     new FaviconsWebpackPlugin(resolve(__dirname, '../src/assets/images/logo.png')),
     new webpack.DefinePlugin(envKeys),

@@ -10,22 +10,26 @@ const persistConfig = {
   storage,
   whitelist: ['auth']
 }
-
 const persistedReducer = persistReducer(persistConfig, reducers)
 
 const store = createStore(
   persistedReducer,
   {},
   compose(
-    applyMiddleware(thunk)
+    applyMiddleware(thunk),
+
   )
 )
 
 let persistor = persistStore(
   store,
   null, () => {
-    store.getState()
-  })
+    store.getState() // if you want to get restoredState
+  }
+)
+// store.subscribe(mapStoreToStorage);
+
+// persistStore(store, { storage: AsyncStorage, whitelist: ['saves'] })
 
 export default store
 export { persistor, store }

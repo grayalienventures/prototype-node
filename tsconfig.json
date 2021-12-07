@@ -24,6 +24,9 @@
         // "forceIsolatedModules":false
         "useCache":true,
         "usePrecompiledFiles":true
-    }
+    },
+    // "ts-node": {
+    //     "transpileOnly": true
+    //   },
     // "esModuleInterop": true  
 }

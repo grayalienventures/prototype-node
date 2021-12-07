@@ -6,6 +6,7 @@
   "scripts": {
     "install": "node scripts/install.js",
     "dev": "nodemon server.js",
+    "start-dev": "npm run clean-dist && npm run webpack-dev && nodemon server.js",
     "webpack-prod": "webpack -p --config=webpack/prod.js",
     "webpack-dev": "webpack  --config=webpack/dev.js",
     "start-build-dev": "concurrently \"nodemon server.js\" \"webpack -w --config=webpack/dev.js \"     ",
@@ -47,16 +48,18 @@
     "webpack-cli": "^3.3.4",
     "webpack-dev-server": "^3.11.0",
     "webpack-filter-warnings-plugin": "^1.2.1",
+    "webpack-hot-middleware": "^2.25.0",
     "webpack-merge": "^5.5.0",
     "webpack-node-externals": "^1.7.2"
   },
   "dependencies": {
-    "dotenv": "^8.0.0",
     "axios": "^0.18.0",
     "babel-runtime": "^6.26.0",
     "body-parser": "^1.18.3",
     "bootstrap": "^4.3.1",
+    "bytes": "^3.1.1",
     "connected-react-router": "^6.4.0",
+    "dotenv": "^8.0.0",
     "express": "^4.16.4",
     "form-data": "^2.3.3",
     "history": "^4.9.0",
@@ -69,15 +72,17 @@
     "react-bootstrap": "^1.0.0-beta.8",
     "react-datepicker": "^2.5.0",
     "react-dom": ">=16.7.0",
+    "react-hot-loader": "^4.13.0",
     "react-icons": "^3.7.0",
     "react-redux": "^7.0.3",
-    "react-router-dom": "^5.0.1",
+    "react-router-dom": "^5.1.2",
     "react-scripts": "3.0.1",
     "redux": "^4.0.1",
     "redux-logger": "^3.0.6",
     "redux-persist": "^5.10.0",
     "redux-thunk": "^2.3.0",
     "serve-favicon": "^2.5.0",
-    "socket.io": "^2.2.0"
+    "socket.io": "^2.2.0",
+    "wpapi": "^1.2.2"
   }
 }
