@@ -1,5 +1,3 @@
-import { Platform } from 'react-native';
-
 import {
     LOGIN_SUCCESS,
     GET_ADDRESS_USER, LOG_OUT,
