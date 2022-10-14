@@ -67,7 +67,7 @@ const ProfileScreen: React.FC<IProfileScreenProps> = ({ }) => {
             if (res && res.data) {
                 setUser(res.data)
                 resetDirty()
-                return 'User saved successfully.'
+                return 'User saved.'
             }
         } catch (error) {
             throw error
@@ -92,7 +92,7 @@ const ProfileScreen: React.FC<IProfileScreenProps> = ({ }) => {
                     setTimeout(() => {
                         setFileLogo(null)
                     }, 1000);
-                    return "Profile Pic saved successfully."
+                    return "Profile Pic saved."
                 }
             }
         } catch (error) {
