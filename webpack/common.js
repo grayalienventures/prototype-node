@@ -70,6 +70,7 @@ module.exports = {
   plugins: [
     new CheckerPlugin(),
     new HtmlWebpackPlugin({
+      title: process.env.APP_TITLE,
       template: resolve(__dirname, '../src/assets/index.html.ejs'),
     }),
     new FaviconsWebpackPlugin(resolve(__dirname, '../src/assets/images/logo.png')),

@@ -50,17 +50,14 @@ const CustomNavbar: React.FC<InavbarProps> = ({ }) => {
       pathname: `${path}`
     });
   }
-  const getDisplayName = () => {
-    return auth && auth.userData ? `${auth.userData.firstName} ${auth.userData.lastName}` : ""
-  }
 
-  console.log("auth", auth)
+
   return (
     <>
       <Navbar bg="dark" expand="lg" variant="dark"
 
       >
-        <Navbar.Brand href="#home">React-Bootstrap</Navbar.Brand>
+        <Navbar.Brand href="#home">{config.name}</Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="mr-auto">
@@ -81,7 +78,7 @@ const CustomNavbar: React.FC<InavbarProps> = ({ }) => {
               <NavDropdown
                 alignRight
                 title={
-                  <Image src={(auth && auth.userData && auth.userData.profilePic) ? auth.userData.profilePic : images.defaultUser}
+                  <Image src={(auth?.userData?.profilePic) ? auth?.userData?.profilePic : images.defaultUser}
                     className="profile_img_thumbnail"
                     roundedCircle
                     thumbnail={true}
