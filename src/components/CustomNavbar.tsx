@@ -39,29 +39,31 @@ const CustomNavbar: React.FC<InavbarProps> = ({ }) => {
     logOut()
 
   };
-
+   
   /**
    * 
    * @param path 
    */
   const naviagte = (path: string): void => {
-
     history.push({
       pathname: `${path}`
     });
   }
+  const getDisplayName = () => {
+    return auth && auth.userData ? `${auth.userData.firstName} ${auth.userData.lastName}` : ""
+  }
 
-
+  console.log("auth", auth)
   return (
     <>
       <Navbar bg="dark" expand="lg" variant="dark"
 
       >
-        <Navbar.Brand href="#home">{config.name}</Navbar.Brand>
+        <Navbar.Brand href="/">{config.name}</Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="mr-auto">
-            <Nav.Link href="#home">Home</Nav.Link>
+            <NavLink className="nav-link" onClick={() => { naviagte("/home") }} to='/home'>Home</NavLink>
             <Nav.Link href="#link">Link</Nav.Link>
             <NavDropdown title="Dropdown" id="basic-nav-dropdown">
               <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
@@ -78,7 +80,7 @@ const CustomNavbar: React.FC<InavbarProps> = ({ }) => {
               <NavDropdown
                 alignRight
                 title={
-                  <Image src={(auth?.userData?.profilePic) ? auth?.userData?.profilePic : images.defaultUser}
+                  <Image src={(auth && auth.userData && auth.userData.profilePic) ? auth.userData.profilePic : images.defaultUser}
                     className="profile_img_thumbnail"
                     roundedCircle
                     thumbnail={true}
