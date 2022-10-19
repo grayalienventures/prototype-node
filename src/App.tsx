@@ -17,6 +17,7 @@ import { hot } from 'react-hot-loader/root';
 import LoginScreen from './screens/LoginScreen';
 import ProfileScreen from './screens/ProfileScreen';
 import PrivateRoute from './routes/PrivateRoute';
+import FrontEndScreen from './screens/FrontEndScreen';
 
 const RootApp = (props) => {
   let auth = useSelector(state => state.auth)
@@ -35,13 +36,15 @@ const RootApp = (props) => {
                 <CustomNavbar />
                 <div className="page-container  ">
                   <Switch>
-                    <Route exact path="/" component={HomeScreen} />
+                    <Route exact path="/" component={FrontEndScreen} />
+                 
                     <Route exact path="/login" component={LoginScreen} />
+                    <PrivateRoute token={auth.token} path="/home">
+                      <HomeScreen />
+                    </PrivateRoute>
                     <PrivateRoute token={auth.token} path="/profile">
                       <ProfileScreen />
                     </PrivateRoute>
-
-
                     <Route component={Notfound} />
                   </Switch>
                 </div>

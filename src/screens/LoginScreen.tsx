@@ -56,8 +56,8 @@ const LoginScreen: React.FunctionComponent<Props> = (): JSX.Element => {
     }
 
 
-    if (auth.token) {
-        return <Redirect to='/' />
+    if (auth?.token) {
+        return <Redirect to='/home' />
     }
     return (
         <Container className="App mb-5">
