@@ -33,32 +33,31 @@ export type InavbarProps = {
 const CustomNavbar: React.FC<InavbarProps> = ({ }) => {
   let auth = useSelector((state: IAppState) => state.auth)
   let history = useHistory()
-  const onClickLogOut = (event) => {
+  const [expanded, setExpanded] = React.useState(false);
 
+  const onClickLogOut = (event) => {
     event.preventDefault();
     logOut()
-
+    setExpanded(false)
   };
-   
+
   /**
    * 
    * @param path 
    */
   const naviagte = (path: string): void => {
+    setExpanded(false)
     history.push({
       pathname: `${path}`
     });
   }
-  const getDisplayName = () => {
-    return auth && auth.userData ? `${auth.userData.firstName} ${auth.userData.lastName}` : ""
-  }
-
-  console.log("auth", auth)
   return (
     <>
       <Navbar bg="dark" expand="lg" variant="dark"
-
-      >
+        expanded={expanded}
+        onToggle={() => {
+          setExpanded(!expanded)
+        }} >
         <Navbar.Brand href="/">{config.name}</Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
@@ -75,7 +74,7 @@ const CustomNavbar: React.FC<InavbarProps> = ({ }) => {
           </Nav>
           <Nav>
             {(!_.has(auth, "token") || !auth.token)
-              ? <Nav.Link href="/login">Login</Nav.Link>
+              ? <NavLink className="nav-link" onClick={() => { naviagte("/login") }} to='/login'>Login</NavLink>
               :
               <NavDropdown
                 alignRight
