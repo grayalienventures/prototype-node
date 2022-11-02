@@ -35,7 +35,8 @@ const LoginScreen: React.FunctionComponent<Props> = (): JSX.Element => {
             let res = await InstanceAxios.post(`${config.url.wpJson}/wp/v2/token`, params)
             if (res && res.data) {
                 let msg = res.data.message ? res.data.message : "";
-                dispatch(loginSuccess(res.data)).then(() => {
+                // @ts-ignore
+                dispatch(loginSuccess(res.data))?.then(() => {
                     updateUserData()
                 })
 

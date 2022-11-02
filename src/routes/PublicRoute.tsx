@@ -5,7 +5,8 @@ import { useSelector } from 'react-redux'
 
 
 export const PublicRoute = ({ children, token, ...rest }) => {
-    let auth = useSelector(state => state.auth)
+    // @ts-ignore
+    let auth = useSelector(state => state?.auth)
     return (<Route {...rest} render={props => (
         token
             ? <Redirect to={{ pathname: '/', state: { from: props.location } }} />

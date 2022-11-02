@@ -18,9 +18,10 @@ import LoginScreen from './screens/LoginScreen';
 import ProfileScreen from './screens/ProfileScreen';
 import PrivateRoute from './routes/PrivateRoute';
 import FrontEndScreen from './screens/FrontEndScreen';
-
+const PGate = PersistGate as any
 const RootApp = (props) => {
-  let auth = useSelector(state => state.auth)
+  // @ts-ignore
+  let auth = useSelector(state => state?.auth)
   const dispatch = useDispatch()
 
   React.useEffect(() => {
@@ -37,7 +38,7 @@ const RootApp = (props) => {
                 <div className="page-container  ">
                   <Switch>
                     <Route exact path="/" component={FrontEndScreen} />
-                 
+
                     <Route exact path="/login" component={LoginScreen} />
                     <PrivateRoute token={auth.token} path="/home">
                       <HomeScreen />
@@ -62,11 +63,14 @@ const RootApp = (props) => {
 
 
 export const App = () => {
+  // @ts-ignore
   return (
     <Provider store={store}>
-      <PersistGate loading={null} persistor={persistor}>
+      <PGate
+        // @ts-ignore
+        loading={null} persistor={persistor}>
         <RootApp />
-      </PersistGate>
+      </PGate>
     </Provider>
   )
 }
